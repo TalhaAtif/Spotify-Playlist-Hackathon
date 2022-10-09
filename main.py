@@ -5,9 +5,7 @@ import spotipy.util as util
 from cred import *
 from spotipy.oauth2 import SpotifyOAuth
 import json
-
 from pprint import pprint
-
 
 ACCESS_TOKEN  = util.prompt_for_user_token(
         
