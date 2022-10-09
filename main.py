@@ -10,7 +10,9 @@ from pprint import pprint
 
 
 ACCESS_TOKEN  = util.prompt_for_user_token(
-        username= "talha.atif.89",
+        
+        #Insert your spotify username, found in spotify account settings
+        username= "",
         scope= "user-read-playback-state playlist-modify-public user-modify-playback-state",
         client_id=client_ID,
         client_secret=client_SECRET,
@@ -56,23 +58,21 @@ def get_current_track(access_token):
     return (uri, track_name)
 
 scope = 'playlist-modify-public'
-username = 'talha.atif.89'
+
+#Insert your spotify username, found in spotify account settings
+username = ''
 
 token = SpotifyOAuth(scope=scope, username=username, client_id=client_ID, client_secret=client_SECRET, redirect_uri=redirect_URI)
 spotifyObject = spotipy.Spotify(auth_manager=token)
 
-
-#create the playlist
 playlist_name = input("Name your Playlist: ")
 playlist_description = input("Describe your Playlist: ")
 
 spotifyObject.user_playlist_create(user=username, name=playlist_name, public=True, description=playlist_description)
 
-#Find the new Playlist
 prePlaylist = spotifyObject.user_playlists(user=username)
 playlist = prePlaylist['items'][0]['id']
 
-#user_input = get_current_track(ACCESS_TOKEN) #input("Enter a song: ")
 list_of_songs = []
 user_quit= 'n'
 
@@ -85,6 +85,3 @@ while user_quit != 'y':
         list_of_songs.append(song_uri)
         current_song.append(song_uri)
         spotifyObject.user_playlist_add_tracks(user=username, playlist_id=playlist, tracks=current_song)
-
-
-
